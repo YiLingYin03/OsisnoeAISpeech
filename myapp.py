@@ -3,7 +3,7 @@ import time
 import glob
 import os
 
-from speech_synthesis import azure_text_to_speech
+from speech_synthesis import azure_text_to_speech, azure_text_to_speech_file
 
 # disable warnings
 st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -25,7 +25,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 st.sidebar.title("Menu")
 analyze = st.sidebar.selectbox(
-    '', ["Text2Speech"], index=0)
+    '', ["Text2Speech","Text2SpeechAudioFile"], index=0)
 
 
 def main():
@@ -75,6 +75,51 @@ def main():
                 st.success("Finished Reading !")
     # ------- audio to text ----------------------------------------------------
 
+    if analyze == "Text2SpeechAudioFile":
+        try:
+            os.mkdir("temp")
+        except:
+            pass
+
+        text = st.text_area(label="Enter Your English Manuscript: ", value="Hello, Nice to meet you!")
+        # select english accent options for the audio output
+        english_accent = st.selectbox(
+            "Chose You AI Assistant: ",
+            (
+                "Default",
+                "Australia-Natasha",
+                "Australia-William",
+                "Australia-Annette",
+                "Australia-Carly",
+                "Australia-Darren",
+            ),
+        )
+
+        accent = "en-US-JennyMultilingualNeural"
+
+        if english_accent == "Default":
+            accent = "en-US-JennyMultilingualNeural"
+        elif english_accent == "Australia-Natasha":
+            accent = "en-AU-NatashaNeural"
+        elif english_accent == "Australia-William":
+            accent = "en-AU-WilliamNeural"
+        elif english_accent == "Australia-Annette":
+            accent = "en-AU-AnnetteNeural"
+        elif english_accent == "Australia-Carly":
+            accent = "en-AU-CarlyNeural"
+        elif english_accent == "Australia-Darren":
+            accent = "en-AU-DarrenNeural"
+
+        # Create a placeholder for the button
+
+        # When click "Generate" Button start convert text to speech audio file
+        if st.button(key="Generate",label="Generate"):
+            with st.spinner("Generating..."):
+                azure_text_to_speech_file(text, accent)
+                st.success("Finished Speech Generating!")
+            audio_file = open('temp/outputfile.wav', 'rb')
+            audio_bytes = audio_file.read()
+            st.audio(audio_bytes, format='audio/wav')
     # ------- sidebar markdown ----------------------------------------------------
     st.sidebar.markdown(
         """
@@ -98,14 +143,6 @@ def main():
     4. 
     """)
 
-    # preview app demo
-    # demo = st.sidebar.checkbox('App Demo')
-    # if demo == 1:
-    #     st.sidebar.video('https://res.cloudinary.com/dfgg73dvr/video/upload/v1624127072/ezgif.com-gif-maker_k56lry.mp4',
-    #                      format='mp4')
-    #
-    # st.sidebar.header("")
-
     st.sidebar.markdown(
         """
     -----------
@@ -118,7 +155,7 @@ def main():
 
     # ----- deleting files from directories so we don't overload the app------
     def remove_mp3_files(n):
-        mp3_files = glob.glob("temp/*mp3")
+        mp3_files = glob.glob("temp/*wav")
         if len(mp3_files) != 0:
             now = time.time()
             n_days = n * 86400
