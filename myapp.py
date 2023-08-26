@@ -129,28 +129,18 @@ def main():
     
     You can better practice your speaking and listening skills 
     by choosing an AI assistant with different accent reading text for you.
+    
+    [![Rae Yin](https://img.shields.io/badge/Author-@YiLingYin03-gray.svg?colorA=gray&colorB=dodgergreen&logo=github)](https://github.com/YiLingYin03)
+    [![Rae Yin](https://img.shields.io/badge/Gmail-yinyiling03@gmail.com-red?logo=gmail)]()
     """)
-
-    st.sidebar.header("")  # initialize empty space
 
     st.sidebar.markdown(
         """
     ----------
     ## Instructions
-    1. Enter Your English Manuscript (). 
+    1. Enter Your English Manuscript. 
     2. Select Your English AI Assistant with Preference Accent.
     3. Then Hit the Read Button. 
-    4. 
-    """)
-
-    st.sidebar.markdown(
-        """
-    -----------
-    # Connect
-
-    [![Rae Yin](https://img.shields.io/badge/Author-@YiLingYin03-gray.svg?colorA=gray&colorB=dodgergreen&logo=github)](https://github.com/YiLingYin03)
-    [![Rae Yin](https://img.shields.io/badge/Gmail-yinyiling03@gmail.com-red?logo=gmail)]()
-
     """)
 
     # ----- deleting files from directories so we don't overload the app------
