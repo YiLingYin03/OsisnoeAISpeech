@@ -12,7 +12,7 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 # img = Image.open('images.jpeg')
 st.title('English Text to Speech Web App')
 # st.image(img, width=650)
-st.subheader("Navigate to side bar to see more options")
+# st.subheader("Navigate to side bar to see more options")
 # re-configuring page layout to restrict users from overwriting the app configuraion
 
 hide_streamlit_style = '''
@@ -37,7 +37,9 @@ def main():
         except:
             pass
 
-        text = st.text_area(label="Enter Your English Manuscript: ", value="Hello, Nice to meet you!")
+        text = st.text_area(label="Enter Your English Manuscript: ",
+                            value="Hello, Nice to meet you!",
+                            height=300)
         # select english accent options for the audio output
         english_accent = st.selectbox(
             "Chose You AI Assistant: ",
@@ -48,6 +50,12 @@ def main():
                 "Australia-Annette",
                 "Australia-Carly",
                 "Australia-Darren",
+                "UnitedKingdom-Sonia",
+                "UnitedKingdom-Ryan",
+                "UnitedKingdom-Libby",
+                "UnitedKingdom-Abbi",
+                "UnitedKingdom-Alfie",
+                "UnitedKingdom-Elliot"
             ),
         )
 
@@ -65,7 +73,18 @@ def main():
             accent = "en-AU-CarlyNeural"
         elif english_accent == "Australia-Darren":
             accent = "en-AU-DarrenNeural"
-
+        elif english_accent == "UnitedKingdom-Sonia":
+            accent = "en-GB-SoniaNeural"
+        elif english_accent == "UnitedKingdom-Ryan":
+            accent = "en-GB-RyanNeural"  # good voice
+        elif english_accent == "UnitedKingdom-Libby":
+            accent = "en-GB-LibbyNeural"
+        elif english_accent == "UnitedKingdom-Abbi":
+            accent = "en-GB-AbbiNeural"
+        elif english_accent == "UnitedKingdom-Alfie":
+            accent = "en-GB-AlfieNeural"
+        elif english_accent == "UnitedKingdom-Elliot":
+            accent = "en-GB-ElliotNeural"
         # Create a placeholder for the button
 
         # When click "Read" Button start convert text to speech
@@ -81,7 +100,9 @@ def main():
         except:
             pass
 
-        text = st.text_area(label="Enter Your English Manuscript: ", value="Hello, Nice to meet you!")
+        text = st.text_area(label="Enter Your English Manuscript: ",
+                            value="Hello, Nice to meet you!",
+                            height=250)
         # select english accent options for the audio output
         english_accent = st.selectbox(
             "Chose You AI Assistant: ",
@@ -92,6 +113,12 @@ def main():
                 "Australia-Annette",
                 "Australia-Carly",
                 "Australia-Darren",
+                "UnitedKingdom-Sonia",
+                "UnitedKingdom-Ryan",
+                "UnitedKingdom-Libby",
+                "UnitedKingdom-Abbi",
+                "UnitedKingdom-Alfie",
+                "UnitedKingdom-Elliot"
             ),
         )
 
@@ -109,6 +136,18 @@ def main():
             accent = "en-AU-CarlyNeural"
         elif english_accent == "Australia-Darren":
             accent = "en-AU-DarrenNeural"
+        elif english_accent == "UnitedKingdom-Sonia":
+            accent = "en-GB-SoniaNeural"
+        elif english_accent == "UnitedKingdom-Ryan":
+            accent = "en-GB-RyanNeural"
+        elif english_accent == "UnitedKingdom-Libby":
+            accent = "en-GB-LibbyNeural"
+        elif english_accent == "UnitedKingdom-Abbi":
+            accent = "en-GB-AbbiNeural"
+        elif english_accent == "UnitedKingdom-Alfie":
+            accent = "en-GB-AlfieNeural"
+        elif english_accent == "UnitedKingdom-Elliot":
+            accent = "en-GB-ElliotNeural"
 
         # Create a placeholder for the button
 
