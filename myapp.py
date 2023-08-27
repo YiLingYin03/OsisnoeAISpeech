@@ -2,7 +2,8 @@ import streamlit as st
 import time
 import glob
 import os
-
+from PIL import Image
+from accentlibs import get_accent, get_accent_list,get_test_script
 from speech_synthesis import azure_text_to_speech, azure_text_to_speech_file
 
 # disable warnings
@@ -10,7 +11,7 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 # img = Image.open('images.jpeg')
-st.title('English Text to Speech Web App')
+st.title('OsisnoeAISpeech')
 # st.image(img, width=650)
 # st.subheader("Navigate to side bar to see more options")
 # re-configuring page layout to restrict users from overwriting the app configuraion
@@ -25,7 +26,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 st.sidebar.title("Menu")
 analyze = st.sidebar.selectbox(
-    '', ["Text2Speech","Text2SpeechAudioFile"], index=0)
+    '', ["Text2Speech", "Text2SpeechAudioFile"], index=0)
 
 
 def main():
@@ -37,58 +38,20 @@ def main():
         except:
             pass
 
-        text = st.text_area(label="Enter Your English Manuscript: ",
-                            value="Hello, Nice to meet you!",
+        breif_introduction = get_test_script()
+        text = st.text_area(label=":nazar_amulet: "+"Enter Your English Manuscript: ",
+                            value=breif_introduction,
                             height=300)
         # select english accent options for the audio output
-        english_accent = st.selectbox(
-            "Chose You AI Assistant: ",
-            (
-                "Default",
-                "Australia-Natasha",
-                "Australia-William",
-                "Australia-Annette",
-                "Australia-Carly",
-                "Australia-Darren",
-                "UnitedKingdom-Sonia",
-                "UnitedKingdom-Ryan",
-                "UnitedKingdom-Libby",
-                "UnitedKingdom-Abbi",
-                "UnitedKingdom-Alfie",
-                "UnitedKingdom-Elliot"
-            ),
-        )
+        english_accent = get_accent_list()
+        accent, profolio = get_accent(english_accent)
 
-        accent = "en-US-JennyMultilingualNeural"
-
-        if english_accent == "Default":
-            accent = "en-US-JennyMultilingualNeural"
-        elif english_accent == "Australia-Natasha":
-            accent = "en-AU-NatashaNeural"
-        elif english_accent == "Australia-William":
-            accent = "en-AU-WilliamNeural"
-        elif english_accent == "Australia-Annette":
-            accent = "en-AU-AnnetteNeural"
-        elif english_accent == "Australia-Carly":
-            accent = "en-AU-CarlyNeural"
-        elif english_accent == "Australia-Darren":
-            accent = "en-AU-DarrenNeural"
-        elif english_accent == "UnitedKingdom-Sonia":
-            accent = "en-GB-SoniaNeural"
-        elif english_accent == "UnitedKingdom-Ryan":
-            accent = "en-GB-RyanNeural"  # good voice
-        elif english_accent == "UnitedKingdom-Libby":
-            accent = "en-GB-LibbyNeural"
-        elif english_accent == "UnitedKingdom-Abbi":
-            accent = "en-GB-AbbiNeural"
-        elif english_accent == "UnitedKingdom-Alfie":
-            accent = "en-GB-AlfieNeural"
-        elif english_accent == "UnitedKingdom-Elliot":
-            accent = "en-GB-ElliotNeural"
-        # Create a placeholder for the button
+        # if profolio != "":
+        #     image = Image.open('assets/assistant_img/' + profolio)
+        #     st.image(image, caption='AI Assistant', width=50)
 
         # When click "Read" Button start convert text to speech
-        if st.button(key="Read1",label="Read"):
+        if st.button(key="Read1", label="Read"):
             with st.spinner("Reading..."):
                 azure_text_to_speech(text, accent)
                 st.success("Finished Reading !")
@@ -99,60 +62,20 @@ def main():
             os.mkdir("temp")
         except:
             pass
-
-        text = st.text_area(label="Enter Your English Manuscript: ",
-                            value="Hello, Nice to meet you!",
+        breif_introduction = get_test_script()
+        text = st.text_area(label=":headphones: Enter Your English Manuscript:",
+                            value=breif_introduction,
                             height=250)
         # select english accent options for the audio output
-        english_accent = st.selectbox(
-            "Chose You AI Assistant: ",
-            (
-                "Default",
-                "Australia-Natasha",
-                "Australia-William",
-                "Australia-Annette",
-                "Australia-Carly",
-                "Australia-Darren",
-                "UnitedKingdom-Sonia",
-                "UnitedKingdom-Ryan",
-                "UnitedKingdom-Libby",
-                "UnitedKingdom-Abbi",
-                "UnitedKingdom-Alfie",
-                "UnitedKingdom-Elliot"
-            ),
-        )
+        english_accent = get_accent_list()
+        accent, profolio = get_accent(english_accent)
 
-        accent = "en-US-JennyMultilingualNeural"
-
-        if english_accent == "Default":
-            accent = "en-US-JennyMultilingualNeural"
-        elif english_accent == "Australia-Natasha":
-            accent = "en-AU-NatashaNeural"
-        elif english_accent == "Australia-William":
-            accent = "en-AU-WilliamNeural"
-        elif english_accent == "Australia-Annette":
-            accent = "en-AU-AnnetteNeural"
-        elif english_accent == "Australia-Carly":
-            accent = "en-AU-CarlyNeural"
-        elif english_accent == "Australia-Darren":
-            accent = "en-AU-DarrenNeural"
-        elif english_accent == "UnitedKingdom-Sonia":
-            accent = "en-GB-SoniaNeural"
-        elif english_accent == "UnitedKingdom-Ryan":
-            accent = "en-GB-RyanNeural"
-        elif english_accent == "UnitedKingdom-Libby":
-            accent = "en-GB-LibbyNeural"
-        elif english_accent == "UnitedKingdom-Abbi":
-            accent = "en-GB-AbbiNeural"
-        elif english_accent == "UnitedKingdom-Alfie":
-            accent = "en-GB-AlfieNeural"
-        elif english_accent == "UnitedKingdom-Elliot":
-            accent = "en-GB-ElliotNeural"
-
-        # Create a placeholder for the button
+        # if profolio != "":
+        #     image = Image.open('assets/assistant_img/' + profolio)
+        #     st.image(image, caption='AI Assistant', width=100)
 
         # When click "Generate" Button start convert text to speech audio file
-        if st.button(key="Generate",label="Generate"):
+        if st.button(key="Generate", label="Generate"):
             with st.spinner("Generating..."):
                 azure_text_to_speech_file(text, accent)
                 st.success("Finished Speech Generating!")
@@ -177,9 +100,10 @@ def main():
         """
     ----------
     ## Instructions
-    1. Enter Your English Manuscript. 
-    2. Select Your English AI Assistant with Preference Accent.
-    3. Then Hit the Read Button. 
+    1. Select menu to decide which service you want use (reading text/generating audio); 
+    2. After that, enter your own english manuscript in the input text area; 
+    3. Select your English AI assistant with your preference accent; 
+    4. Then, hit the 'Read'/'Generate' Button to start the text to speech journey. 
     """)
 
     # ----- deleting files from directories so we don't overload the app------
