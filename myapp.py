@@ -91,16 +91,26 @@ def main():
     
     You can better practice your speaking and listening skills 
     by choosing an AI assistant with different accent reading text for you.
-    
+    """)
+    # APP Demo videos
+    if st.sidebar.checkbox(label="See Text2Speech Demo"):
+        video_file1 = open('assets/instruction_video/OsisnoeAISpeech_Reading.mp4', 'rb')
+        video_bytes1 = video_file1.read()
+        st.sidebar.video(video_bytes1)
+    if st.sidebar.checkbox(label="See Text2SpeechAudioFile Demo"):
+        video_file2 = open('assets/instruction_video/OsisnoeAISpeech_AudioGeneration.mp4', 'rb')
+        video_bytes2 = video_file2.read()
+        st.sidebar.video(video_bytes2)
+    st.sidebar.markdown(
+        """
     [![Rae Yin](https://img.shields.io/badge/Author-@YiLingYin03-gray.svg?colorA=gray&colorB=dodgergreen&logo=github)](https://github.com/YiLingYin03)
     [![Rae Yin](https://img.shields.io/badge/Gmail-yinyiling03@gmail.com-red?logo=gmail)]()
     """)
-
     st.sidebar.markdown(
         """
     ----------
     ## Instructions
-    1. Select menu to decide which service you want use (reading text/generating audio); 
+    1. Select menu to decide which service you want use (Text2Speech/Text2SpeechAudioFile); 
     2. After that, enter your own english manuscript in the input text area; 
     3. Select your English AI assistant with your preference accent; 
     4. Then, hit the 'Read'/'Generate' Button to start the text to speech journey. 
