@@ -2,7 +2,6 @@ import streamlit as st
 import time
 import glob
 import os
-from PIL import Image
 from accentlibs import get_accent, get_accent_list,get_test_script
 from speech_synthesis import azure_text_to_speech, azure_text_to_speech_file
 
@@ -31,7 +30,6 @@ analyze = st.sidebar.selectbox(
 
 def main():
     # ----- Text to Audio------------------------------------------------------
-
     if analyze == "Text2Speech":
         try:
             os.mkdir("temp")
@@ -42,6 +40,7 @@ def main():
         text = st.text_area(label=":nazar_amulet: "+"Enter Your English Manuscript: ",
                             value=breif_introduction,
                             height=300)
+
         # select english accent options for the audio output
         english_accent = get_accent_list()
         accent, profolio = get_accent(english_accent)
