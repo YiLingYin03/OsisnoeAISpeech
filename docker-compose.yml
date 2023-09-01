@@ -1,0 +1,10 @@
+services:
+  streamlit:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    ports:
+      - "8081:8501"
+    environment:
+      - SPEECH_KEY=${SPEECH_KEY}
+      - SPEECH_REGION=${SPEECH_REGION}

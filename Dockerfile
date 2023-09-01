@@ -25,7 +25,10 @@ RUN apt-get update && \
     libc6 \
     libpthread-stubs0-dev \
     libasound2 \
-    ca-certificates
+    ca-certificates \
+    alsa-utils \
+    pulseaudio
+
 # Set the working directory inside the container
 WORKDIR /app
 
